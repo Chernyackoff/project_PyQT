@@ -25,11 +25,16 @@ class Authorisation(QMainWindow):
             if login + password != file.readline():
                 self.ErrorText.setText('Ошибка. Создайте аккаунт')
             else:
-                pass
+                self.switc_to_Main()
 
     def switch(self):
         window.close()
         self.new_window = NewAccount()
+        self.new_window.show()
+
+    def switch_to_Main(self):
+        self.close()
+        self.new_window = MainPage()
         self.new_window.show()
 
 
@@ -52,6 +57,9 @@ class NewAccount(QMainWindow):
         self.new_window = Authorisation()
         self.new_window.show()
 
+
+class MainPage(QMainWindow):
+    pass
 
 
 app = QApplication(sys.argv)
