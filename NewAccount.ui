@@ -14,7 +14,7 @@
    <string>New Account</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="LoginFld">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -32,7 +32,7 @@
      <string>Login</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="passwFld">
     <property name="geometry">
      <rect>
       <x>100</x>

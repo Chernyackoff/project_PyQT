@@ -10,7 +10,7 @@ from PyQt5 import uic
 class Authorisation(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Authorisation.ui',self)
+        uic.loadUi('Authorisation.ui' ,self)
         self.LogInBtn.clicked.connect(self.LogIn)
         self.NewAccount.triggered.connect(self.switch)
 
@@ -29,16 +29,29 @@ class Authorisation(QMainWindow):
 
     def switch(self):
         window.close()
-        new_window = NewAccount()
-        new_window.show()
+        self.new_window = NewAccount()
+        self.new_window.show()
 
 
 class NewAccount(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Authorisation.ui',self)
-        self.SignUpBtn.clicked.connect(self.LogIn)
+        uic.loadUi('NewAccount.ui', self)
+        self.SignUpBtn.clicked.connect(self.SignUp)
         self.Authorisation.triggered.connect(self.switch)
+
+    def SignUp(self):
+        file = open('Account.txt', 'w')
+        login = self.LoginFld.text()
+        password = self.passwFld.text()
+        file.write(login + password)
+        self.switch()
+
+    def switch(self):
+        self.close()
+        self.new_window = Authorisation()
+        self.new_window.show()
+
 
 
 app = QApplication(sys.argv)

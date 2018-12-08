@@ -104,7 +104,6 @@
     <property name="title">
      <string>Выберите действие</string>
     </property>
-    <addaction name="Authorisation"/>
     <addaction name="NewAccount"/>
    </widget>
    <addaction name="menu"/>
