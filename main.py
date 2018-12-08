@@ -18,9 +18,12 @@ class MyWidget(QMainWindow):
             file = open('Account.txt', 'r')
         except FileNotFoundError:
             self.ErrorText.setText('Ошибка. Создайте аккаунт')
-        login = self.LoginFld.text()
-        password = self.passwrdFld.text()
-        if login + password != file.readline()
+        else:
+            login = self.LoginFld.text()
+            password = self.passwFld.text()
+            if login + password != file.readline():
+                pass
+
 
 app = QApplication(sys.argv)
 window = MyWidget()
