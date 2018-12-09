@@ -4,7 +4,7 @@
 
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QDialog
 from PyQt5 import uic
 
 
@@ -63,6 +63,13 @@ class NewAccount(QMainWindow):
         login = self.LoginFld.text()
         password = self.passwFld.text()
         try:
+            if login != '' and password != '':
+                pass
+            else:
+                raise ValueError
+        except ValueError:
+            self.ErrorText.setText('Введите логин И (!!!) Пароль')
+        try:
             file2 = open('Account.txt', 'r')
             if login + password == file2.readline():
                 self.ErrorText.setText('Ошибка. Аккаунт уже существует')
@@ -82,11 +89,11 @@ class NewAccount(QMainWindow):
         self.new_window.show()
 
 
-class Dialog(QMainWindow):
+class Dialog(QDialog):
     def __init__(self):
         super().__init__()
-        uic.loadUi('NewAccount.ui', self)
-        self.cancel.clicked.connect(self.close())
+        uic.loadUi('Dialog.ui', self)
+        self.cancel.clicked.connect(self.close)
         self.okey.clicked.connect(self.deletion)
 
     def deletion(self):
