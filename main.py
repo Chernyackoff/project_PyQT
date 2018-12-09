@@ -3,6 +3,7 @@
 
 
 import sys
+import os
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5 import uic
 
@@ -13,8 +14,10 @@ class Authorisation(QMainWindow):
         uic.loadUi('Authorisation.ui', self)
         self.LogInBtn.clicked.connect(self.LogIn)
         self.NewAccount.triggered.connect(self.switch)
+        self.max = 1
 
     def LogIn(self):
+        count = 0
         try:
             file = open('Account.txt', 'r')
         except FileNotFoundError:
@@ -23,15 +26,16 @@ class Authorisation(QMainWindow):
             login = self.LoginFld.text()
             password = self.passwFld.text()
             line = file.readline()
-            max = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-            count = 0
             if login + password != line or line == '':
                 self.ErrorText.setText('Ошибка. Создайте аккаунт')
                 count += 1
             else:
                 self.switch_to_main()
-            if max == count:
-                pass
+        if self.max == count:
+            try:
+                os.remove('Safe.txt')
+            except FileNotFoundError:
+                self.ErrorText.setText('Вы  превысили лимит: пароли стерты')
 
     def switch(self):
         window.close()
@@ -60,17 +64,20 @@ class NewAccount(QMainWindow):
                 self.ErrorText.setText('Ошибка. Аккаунт уже существует')
                 file2.close()
             else:
-                file = open('Account.txt', 'w')
-                file.write(login + password)
-                file.close()
-                self.switch()
+                self.dialog = Dialog()
         except FileNotFoundError:
-            pass
+            file = open('Account.txt', 'w')
+            file.write(login + password)
+            file.close()
+            self.switch()
 
     def switch(self):
         self.close()
         self.new_window = Authorisation()
         self.new_window.show()
+
+
+class Dialog()
 
 
 class MainPage(QMainWindow):
