@@ -23,10 +23,15 @@ class Authorisation(QMainWindow):
             login = self.LoginFld.text()
             password = self.passwFld.text()
             line = file.readline()
+            max = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            count = 0
             if login + password != line or line == '':
                 self.ErrorText.setText('Ошибка. Создайте аккаунт')
+                count += 1
             else:
                 self.switch_to_main()
+            if max == count:
+                pass
 
     def switch(self):
         window.close()
