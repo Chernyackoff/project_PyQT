@@ -14,7 +14,7 @@ class Authorisation(QMainWindow):
         uic.loadUi('Authorisation.ui', self)
         self.LogInBtn.clicked.connect(self.LogIn)
         self.NewAccount.triggered.connect(self.switch)
-        self.max = 1
+        self.max = 100000000000000000000000000000000000000000000000000000000000000000000000
 
     def LogIn(self):
         count = 0
@@ -36,6 +36,10 @@ class Authorisation(QMainWindow):
                 os.remove('Safe.txt')
             except FileNotFoundError:
                 self.ErrorText.setText('Вы  превысили лимит: пароли стерты')
+                try:
+                    os.remove('Passwords.txt')
+                except FileNotFoundError:
+                    pass
 
     def switch(self):
         window.close()
@@ -65,6 +69,7 @@ class NewAccount(QMainWindow):
                 file2.close()
             else:
                 self.dialog = Dialog()
+                self.dialog.show()
         except FileNotFoundError:
             file = open('Account.txt', 'w')
             file.write(login + password)
@@ -77,7 +82,19 @@ class NewAccount(QMainWindow):
         self.new_window.show()
 
 
-class Dialog()
+class Dialog(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('NewAccount.ui', self)
+        self.cancel.clicked.connect(self.close())
+        self.okey.clicked.connect(self.deletion)
+
+    def deletion(self):
+        os.remove('Account.txt')
+        try:
+            os.remove('Passwords.txt')
+        except FileNotFoundError:
+            pass
 
 
 class MainPage(QMainWindow):

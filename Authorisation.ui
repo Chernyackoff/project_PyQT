@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset theme="safe.png">
-    <normaloff>.</normaloff>.</iconset>
+    <normaloff>../ProjectPyQt1</normaloff>../ProjectPyQt1</iconset>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
@@ -35,7 +35,7 @@
       <widget class="QLabel" name="ErrorText">
        <property name="font">
         <font>
-         <pointsize>20</pointsize>
+         <pointsize>16</pointsize>
         </font>
        </property>
        <property name="text">
