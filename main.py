@@ -25,12 +25,20 @@ class Authorisation(QMainWindow):
         else:
             login = self.LoginFld.text()
             password = self.passwFld.text()
-            line = file.readline()
-            if login + password != line or line == '':
-                self.ErrorText.setText('Ошибка. Создайте аккаунт')
-                count += 1
+            try:
+                if login != '' and password != '':
+                    pass
+                else:
+                    raise ValueError
+            except ValueError:
+                self.ErrorText.setText('Введите логин И (!!!) Пароль')
             else:
-                self.switch_to_main()
+                line = file.readline()
+                if login + password != line or line == '':
+                    self.ErrorText.setText('Ошибка. Создайте аккаунт')
+                    count += 1
+                else:
+                    self.switch_to_main()
         if self.max == count:
             try:
                 os.remove('Safe.txt')
