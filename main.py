@@ -10,7 +10,7 @@ from PyQt5 import uic
 class Authorisation(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Authorisation.ui' ,self)
+        uic.loadUi('Authorisation.ui', self)
         self.LogInBtn.clicked.connect(self.LogIn)
         self.NewAccount.triggered.connect(self.switch)
 
@@ -22,17 +22,18 @@ class Authorisation(QMainWindow):
         else:
             login = self.LoginFld.text()
             password = self.passwFld.text()
-            if login + password != file.readline():
+            line = file.readline()
+            if login + password != line or line == '':
                 self.ErrorText.setText('Ошибка. Создайте аккаунт')
             else:
-                self.switc_to_Main()
+                self.switch_to_main()
 
     def switch(self):
         window.close()
         self.new_window = NewAccount()
         self.new_window.show()
 
-    def switch_to_Main(self):
+    def switch_to_main(self):
         self.close()
         self.new_window = MainPage()
         self.new_window.show()
@@ -46,11 +47,20 @@ class NewAccount(QMainWindow):
         self.Authorisation.triggered.connect(self.switch)
 
     def SignUp(self):
-        file = open('Account.txt', 'w')
         login = self.LoginFld.text()
         password = self.passwFld.text()
-        file.write(login + password)
-        self.switch()
+        try:
+            file2 = open('Account.txt', 'r')
+            if login + password == file2.readline():
+                self.ErrorText.setText('Ошибка. Аккаунт уже существует')
+                file2.close()
+            else:
+                file = open('Account.txt', 'w')
+                file.write(login + password)
+                file.close()
+                self.switch()
+        except FileNotFoundError:
+            pass
 
     def switch(self):
         self.close()
@@ -59,7 +69,9 @@ class NewAccount(QMainWindow):
 
 
 class MainPage(QMainWindow):
-    pass
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('MainPage.ui', self)
 
 
 app = QApplication(sys.argv)
