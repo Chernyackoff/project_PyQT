@@ -149,7 +149,7 @@ class AddPassword(QDialog):
         login = self.Login.text()
         password = self.Password.text()
         webprog = self.siteprog.text()
-        sys.stdout = open('webprog', 'w')
+        sys.stdout = open('webprog.txt', 'w')
         print(webprog)
         key = Fernet.generate_key()
         sys.stdout = open('key.txt', 'w')
