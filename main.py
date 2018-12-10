@@ -118,7 +118,41 @@ class MainPage(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('MainPage.ui', self)
+        self.AddPasswd.clicked.connect(self.add_password)
+        self.Safe.clicked.connect(self.safe_switch)
+        self.Settings.clicked.connect(self.settings)
 
+    def add_password(self):
+        self.new_window = AddPassword()
+        self.new_window.show()
+
+    def safe_switch(self):
+        self.close()
+        self.new_window = Safe()
+        self.show()
+
+    def settings(self):
+        self.close()
+        self.new_window = Settings()
+        self.show()
+
+
+class AddPassword(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('AddPassword.ui', self)
+
+
+class Safe(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('Safe.ui', self)
+
+
+class Settings(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('Settings.ui', self)
 
 
 app = QApplication(sys.argv)
