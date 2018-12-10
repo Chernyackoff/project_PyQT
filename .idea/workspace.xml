@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fce78ee6-7ec0-4c50-acf6-9a58bb8d9075" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddPassword.ui" beforeDir="false" afterPath="$PROJECT_DIR$/AddPassword.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewAccount.ui" beforeDir="false" afterPath="$PROJECT_DIR$/NewAccount.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,14 +58,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1524" />
+          <entry key="py" value="2121" />
           <entry key="txt" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="76" />
-          <entry key="Python" value="1524" />
+          <entry key="Python" value="2121" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="txt" value="1" />
+          <entry key="webprog" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
     </session>
@@ -73,8 +86,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="131" column="19" lean-forward="true" selection-start-line="131" selection-start-column="19" selection-end-line="131" selection-end-column="19" />
+            <state relative-caret-position="327">
+              <caret line="179" column="21" lean-forward="true" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
               <folding>
                 <element signature="e#48#58#0" expanded="true" />
               </folding>
@@ -90,6 +103,14 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>max</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>maimum_try</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -119,30 +140,6 @@
             <path>
               <item name="ProjectPyQt" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProjectPyQt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjectPyQt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjectPyQt" type="462c0819:PsiDirectoryNode" />
-              <item name=".env" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjectPyQt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjectPyQt" type="462c0819:PsiDirectoryNode" />
-              <item name=".env" type="462c0819:PsiDirectoryNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjectPyQt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjectPyQt" type="462c0819:PsiDirectoryNode" />
-              <item name=".env" type="462c0819:PsiDirectoryNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjectPyQt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjectPyQt" type="462c0819:PsiDirectoryNode" />
-              <item name=".env" type="462c0819:PsiDirectoryNode" />
-              <item name="Scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -303,10 +300,16 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Authorisation.py" />
+    <entry file="file://$PROJECT_DIR$/webprog">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/token.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="131" column="19" lean-forward="true" selection-start-line="131" selection-start-column="19" selection-end-line="131" selection-end-column="19" />
+        <state relative-caret-position="327">
+          <caret line="179" column="21" lean-forward="true" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
           <folding>
             <element signature="e#48#58#0" expanded="true" />
           </folding>

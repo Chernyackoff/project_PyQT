@@ -6,8 +6,10 @@ import sys
 import os
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QDialog
 from PyQt5 import uic
+from cryptography.fernet import Fernet
 
-max = 100000000000000000000000000000000000000000000000000
+
+maimum_try = 10000000000000000000000000000000000000000000000000000000000000000000000000000000
 
 
 class Authorisation(QMainWindow):
@@ -16,7 +18,6 @@ class Authorisation(QMainWindow):
         uic.loadUi('Authorisation.ui', self)
         self.LogInBtn.clicked.connect(self.LogIn)
         self.NewAccount.triggered.connect(self.switch)
-        #self.max = 100000000000000000000000000000000000000000000000000000000000000000000000
 
     def LogIn(self):
         count = 0
@@ -41,13 +42,13 @@ class Authorisation(QMainWindow):
                     count += 1
                 else:
                     self.switch_to_main()
-        if max == count:
+        if maimum_try == count:
             try:
-                os.remove('Safe.txt')
+                os.remove('keys.txt')
             except FileNotFoundError:
-                self.ErrorText.setText('Вы  превысили лимит: пароли стерты')
+                self.ErrorText.setText('Вы  превысили лимит: ключи стерты')
                 try:
-                    os.remove('Passwords.txt')
+                    os.remove('token.txt')
                 except FileNotFoundError:
                     pass
 
@@ -123,8 +124,8 @@ class MainPage(QMainWindow):
         self.Settings.clicked.connect(self.settings)
 
     def add_password(self):
-        self.new_window = AddPassword()
-        self.new_window.show()
+        self.dialog = AddPassword()
+        self.dialog.show()
 
     def safe_switch(self):
         self.close()
@@ -141,6 +142,24 @@ class AddPassword(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi('AddPassword.ui', self)
+        self.cancel.clicked.connect(self.close)
+        self.okey.clicked.connect(self.addnew)
+
+    def addnew(self):
+        login = self.Login.text()
+        password = self.Password.text()
+        webprog = self.siteprog.text()
+        sys.stdout = open('webprog', 'w')
+        print(webprog)
+        key = Fernet.generate_key()
+        sys.stdout = open('key.txt', 'w')
+        print(key)
+        fernet = Fernet(key)
+        line = login + ' ' + password
+        token = fernet.encrypt(line.encode('UTF-8'))
+        sys.stdout = open("token.txt", 'w')
+        print(token)
+
 
 
 class Safe(QMainWindow):
