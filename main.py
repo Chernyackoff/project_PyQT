@@ -7,6 +7,8 @@ import os
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QDialog
 from PyQt5 import uic
 
+max = 100000000000000000000000000000000000000000000000000
+
 
 class Authorisation(QMainWindow):
     def __init__(self):
@@ -14,7 +16,7 @@ class Authorisation(QMainWindow):
         uic.loadUi('Authorisation.ui', self)
         self.LogInBtn.clicked.connect(self.LogIn)
         self.NewAccount.triggered.connect(self.switch)
-        self.max = 100000000000000000000000000000000000000000000000000000000000000000000000
+        #self.max = 100000000000000000000000000000000000000000000000000000000000000000000000
 
     def LogIn(self):
         count = 0
@@ -39,7 +41,7 @@ class Authorisation(QMainWindow):
                     count += 1
                 else:
                     self.switch_to_main()
-        if self.max == count:
+        if max == count:
             try:
                 os.remove('Safe.txt')
             except FileNotFoundError:
@@ -116,6 +118,7 @@ class MainPage(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('MainPage.ui', self)
+
 
 
 app = QApplication(sys.argv)
