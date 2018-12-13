@@ -12,7 +12,7 @@ from cryptography.fernet import Fernet
 class Authorisation(QMainWindow):                       # Creates new Authorisation window
     def __init__(self):
         super().__init__()
-        uic.loadUi('Authorisation.ui', self)
+        uic.loadUi('UIs/Authorisation.ui', self)
         self.LogInBtn.clicked.connect(self.LogIn)       # Reads click
         self.NewAccount.triggered.connect(self.switch)  # Reads menu bar
 
@@ -69,7 +69,7 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
 class NewAccount(QMainWindow):                                  # Window of creating of a new account
     def __init__(self):
         super().__init__()
-        uic.loadUi('NewAccount.ui', self)
+        uic.loadUi('UIs/NewAccount.ui', self)
         self.SignUpBtn.clicked.connect(self.SignUp)
         self.Authorisation.triggered.connect(self.switch)
 
@@ -106,7 +106,7 @@ class NewAccount(QMainWindow):                                  # Window of crea
 class Dialog(QDialog):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Dialog.ui', self)
+        uic.loadUi('UIs/Dialog.ui', self)
         self.cancel.clicked.connect(self.close)
         self.okey.clicked.connect(self.deletion)
 
@@ -121,7 +121,7 @@ class Dialog(QDialog):
 class MainPage(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('MainPage.ui', self)
+        uic.loadUi('UIs/MainPage.ui', self)
         self.AddPasswd.clicked.connect(self.add_password)
         self.Safe.clicked.connect(self.safe_switch)
         self.Settings.clicked.connect(self.settings)
@@ -144,7 +144,7 @@ class MainPage(QMainWindow):
 class AddPassword(QDialog):
     def __init__(self):
         super().__init__()
-        uic.loadUi('AddPassword.ui', self)
+        uic.loadUi('UIs/AddPassword.ui', self)
         self.cancel.clicked.connect(self.close)
         self.okey.clicked.connect(self.addnew)
 
@@ -173,7 +173,7 @@ class AddPassword(QDialog):
 class Safe(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Safe.ui', self)
+        uic.loadUi('UIs/Safe.ui', self)
         self.exit.clicked.connect(self.switch)
         self.showp.clicked.connect(self.showtime)
 
@@ -183,7 +183,7 @@ class Safe(QMainWindow):
         webs = []
         tokens = []
         try:
-            file_keys = open('key.txt', 'r')
+            file_keys = open('UIs/key.txt', 'r')
             file_token = open('token.txt', 'r')
             file_prog = open('webprog.txt', 'r')
             for key in file_keys.readlines():
@@ -216,7 +216,7 @@ class Safe(QMainWindow):
 class Settings(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Settings.ui', self)
+        uic.loadUi('UIs/Settings.ui', self)
         self.cancel.clicked.connect(self.switch)
         self.exit.clicked.connect(self.switch)
         self.save.clicked.connect(self.max_mistakes)
