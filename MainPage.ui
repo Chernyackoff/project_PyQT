@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>MainPage</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>safe.png</normalon>
+   </iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">

@@ -18,6 +18,11 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <activeon>safe.png</activeon>
+   </iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="text1">
     <property name="geometry">

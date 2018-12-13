@@ -14,8 +14,8 @@
    <string>Authorisation</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="safe.png">
-    <normaloff>../ProjectPyQt1</normaloff>../ProjectPyQt1</iconset>
+   <iconset>
+    <normaloff>safe.png</normaloff>safe.png</iconset>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>

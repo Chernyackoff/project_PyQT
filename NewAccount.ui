@@ -16,6 +16,11 @@
   <property name="windowTitle">
    <string>New Account</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <disabledon>safe.png</disabledon>
+   </iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
