@@ -183,7 +183,7 @@ class Safe(QMainWindow):
         webs = []
         tokens = []
         try:
-            file_keys = open('UIs/key.txt', 'r')
+            file_keys = open('key.txt', 'r')
             file_token = open('token.txt', 'r')
             file_prog = open('webprog.txt', 'r')
             for key in file_keys.readlines():
