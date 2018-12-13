@@ -185,7 +185,7 @@ class Safe(QMainWindow):
         try:
             file_keys = open('key.txt', 'r')
             file_token = open('token.txt', 'r')
-            file_prog = open('wbprog.txt', 'r')
+            file_prog = open('webprog.txt', 'r')
             for key in file_keys.readlines():
                 keys.append(key)
             for web in file_prog.readlines():
