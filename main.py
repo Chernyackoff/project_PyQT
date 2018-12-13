@@ -18,10 +18,10 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
 
     def LogIn(self):                                            # Process of log in
         count = 0
-        max = 0
+        max_mistakes = 0
         try:
             file = open('max_mistakes.txt', 'r')
-            max = int(file.readline())
+            max_mistakes = int(file.readline())
         except FileNotFoundError:
             pass
         try:
@@ -45,7 +45,7 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
                     count += 1
                 else:
                     self.switch_to_main()
-        if maximum_try == count:                                                # Security needs
+        if max_mistakes == count:                                                # Security needs
             try:
                 os.remove('keys.txt')
             except FileNotFoundError:
