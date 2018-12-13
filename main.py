@@ -130,12 +130,12 @@ class MainPage(QMainWindow):
     def safe_switch(self):
         self.close()
         self.new_window = Safe()
-        self.show()
+        self.new_window.show()
 
     def settings(self):
         self.close()
         self.new_window = Settings()
-        self.show()
+        self.new_window.show()
 
 
 class AddPassword(QDialog):
@@ -149,43 +149,54 @@ class AddPassword(QDialog):
         login = self.Login.text()
         password = self.Password.text()
         webprog = self.siteprog.text()
-        sys.stdout = open('webprog.txt', 'w')
-        print(webprog)
+        file_prog = open('webprog.txt', 'w+')
+        file_prog.write(webprog)
         key = Fernet.generate_key()
-        sys.stdout = open('key.txt', 'w')
-        print(key)
+        file_keys = open('key.txt', 'w+')
+        file_keys.write(key.decode())
         fernet = Fernet(key)
         line = login + ' ' + password
         token = fernet.encrypt(line.encode('UTF-8'))
-        sys.stdout = open("token.txt", 'w')
-        print(token)
+        file_token = open("token.txt", 'w+')
+        file_token.write(token.decode())
+        self.close()
 
 
 class Safe(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('Safe.ui', self)
-        self.line = ''
-        self.keys = []
-        self.webs = []
-        self.tokens = []
-        for key in open('key.txt').readline():
-            self.keys.append(key)
+        self.exit.clicked.connect(self.switch)
+        self.showp.clicked.connect(self.showtime)
+
+    def showtime(self):
+        line = ''
+        keys = []
+        webs = []
+        tokens = []
+        for key in open('key.txt', 'r').readline():
+            keys.append(key)
         for web in open('webprog.txt').readline():
-            self.webs.append(web)
-        for token in open('token.txt').readline():
-            self.tokens.append(token)
-        for i in range(len(self.webs)):
-            webp = self.webs[i]
-            key = self.keys[i]
-            fernet = Fernet(key)
-            token = self.tokens[i]
-            loginpassword = fernet.decrypt(token).decode('UTF-8').split()
+            webs.append(web)
+        for token in open('token.txt', 'r').readline():
+            tokens.append(token)
+        while True:
+            webp = ''.join(webs)
+            key = ''.join(keys)
+            fernet = Fernet(key.encode())
+            token = ''.join(tokens)
+            loginpassword = fernet.decrypt(token.encode()).decode('UTF-8').split()
             login = loginpassword[0]
             password = loginpassword[1]
-            rline = webp + ': ' + 'login: ' + login + '\t' + 'password: ' + password + '\n'
-            self.line += rline
-        self.text.setText(self.line)
+            rline = webp + ': ' + '\t' + 'login: ' + login + '\t' + 'password: ' + password + '\n'
+            line += rline
+            break
+        self.text.setText(line)
+
+    def switch(self):
+        self.close()
+        self.new_window = MainPage()
+        self.new_window.show()
 
 
 class Settings(QMainWindow):

@@ -31,13 +31,31 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>10</y>
       <width>621</width>
-      <height>341</height>
+      <height>331</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="readOnly">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="showp">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>352</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Показать</string>
     </property>
    </widget>
   </widget>
