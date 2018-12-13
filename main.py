@@ -9,27 +9,27 @@ from PyQt5 import uic
 from cryptography.fernet import Fernet
 
 
-maimum_try = 10000000000000000000000000000000000000000000000000000000000000000000000000000000
+maximum_try = 10000000000000000000000000000000000000000000000000000000000000000000000000000000
 
 
-class Authorisation(QMainWindow):
+class Authorisation(QMainWindow):                       # Creates new Authorisation window
     def __init__(self):
         super().__init__()
         uic.loadUi('Authorisation.ui', self)
-        self.LogInBtn.clicked.connect(self.LogIn)
-        self.NewAccount.triggered.connect(self.switch)
+        self.LogInBtn.clicked.connect(self.LogIn)       # Reads click
+        self.NewAccount.triggered.connect(self.switch)  # Reads menu bar
 
-    def LogIn(self):
+    def LogIn(self):                                            # Process of log in
         count = 0
         try:
-            file = open('Account.txt', 'r')
+            file = open('Account.txt', 'r')                     # Opens file with login + password
         except FileNotFoundError:
-            self.ErrorText.setText('Ошибка. Создайте аккаунт')
+            self.ErrorText.setText('Ошибка. Создайте аккаунт')  # Returns Error
         else:
-            login = self.LoginFld.text()
-            password = self.passwFld.text()
+            login = self.LoginFld.text()                        # Reads Login
+            password = self.passwFld.text()                     # Reads password
             try:
-                if login != '' and password != '':
+                if login != '' and password != '':              # If not filled raises Error
                     pass
                 else:
                     raise ValueError
@@ -42,7 +42,7 @@ class Authorisation(QMainWindow):
                     count += 1
                 else:
                     self.switch_to_main()
-        if maimum_try == count:
+        if maximum_try == count:                                                # Security needs
             try:
                 os.remove('keys.txt')
             except FileNotFoundError:
@@ -52,7 +52,7 @@ class Authorisation(QMainWindow):
                 except FileNotFoundError:
                     pass
 
-    def switch(self):
+    def switch(self):                                   # Switches to the new window
         window.close()
         self.new_window = NewAccount()
         self.new_window.show()
@@ -63,7 +63,7 @@ class Authorisation(QMainWindow):
         self.new_window.show()
 
 
-class NewAccount(QMainWindow):
+class NewAccount(QMainWindow):                                  # Window of creating of a new account
     def __init__(self):
         super().__init__()
         uic.loadUi('NewAccount.ui', self)
@@ -161,11 +161,31 @@ class AddPassword(QDialog):
         print(token)
 
 
-
 class Safe(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('Safe.ui', self)
+        self.line = ''
+        self.keys = []
+        self.webs = []
+        self.tokens = []
+        for key in open('key.txt').readline():
+            self.keys.append(key)
+        for web in open('webprog.txt').readline():
+            self.webs.append(web)
+        for token in open('token.txt').readline():
+            self.tokens.append(token)
+        for i in range(len(self.webs)):
+            webp = self.webs[i]
+            key = self.keys[i]
+            fernet = Fernet(key)
+            token = self.tokens[i]
+            loginpassword = fernet.decrypt(token).decode('UTF-8').split()
+            login = loginpassword[0]
+            password = loginpassword[1]
+            rline = webp + ': ' + 'login: ' + login + '\t' + 'password: ' + password + '\n'
+            self.line += rline
+        self.text.setText(self.line)
 
 
 class Settings(QMainWindow):
