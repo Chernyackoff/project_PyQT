@@ -58,7 +58,7 @@
      <string>Отменить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Save">
+   <widget class="QPushButton" name="save">
     <property name="geometry">
      <rect>
       <x>280</x>
@@ -75,9 +75,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>210</y>
+      <y>190</y>
       <width>541</width>
-      <height>221</height>
+      <height>161</height>
      </rect>
     </property>
     <property name="font">
@@ -93,7 +93,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:15pt;&quot;&gt;Все права на программу принадлежат никому. Все делалось ради фана и проекта в Яндекс.Лицей. Качайте с github.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="ErrorText">
     <property name="geometry">
      <rect>
       <x>16</x>
@@ -103,7 +103,20 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exit">
+    <property name="geometry">
+     <rect>
+      <x>154</x>
+      <y>362</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Вернуться в меню</string>
     </property>
    </widget>
   </widget>

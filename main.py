@@ -18,7 +18,7 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
 
     def LogIn(self):                                            # Process of log in
         count = 0
-        max_mistakes = 0
+        max_mistakes = -1
         try:
             file = open('max_mistakes.txt', 'r')
             max_mistakes = int(file.readline())
@@ -41,19 +41,19 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
             else:
                 line = file.readline()
                 if login + password != line or line == '':
-                    self.ErrorText.setText('Ошибка. Создайте аккаунт')
+                    self.ErrorText.setText('Ошибка. Введите верные данные')
                     count += 1
                 else:
                     self.switch_to_main()
         if max_mistakes == count:                                                # Security needs
             try:
-                os.remove('keys.txt')
+                os.remove('key.txt')
             except FileNotFoundError:
                 self.ErrorText.setText('Вы  превысили лимит: ключи стерты')
-                try:
-                    os.remove('token.txt')
-                except FileNotFoundError:
-                    pass
+            try:
+                os.remove('token.txt')
+            except FileNotFoundError:
+                pass
 
     def switch(self):                                   # Switches to the new window
         window.close()
@@ -182,23 +182,30 @@ class Safe(QMainWindow):
         keys = []
         webs = []
         tokens = []
-        for key in open('key.txt', 'r').readlines():
-            keys.append(key)
-        for web in open('webprog.txt').readlines():
-            webs.append(web)
-        for token in open('token.txt', 'r').readlines():
-            tokens.append(token)
-        for i in range(len(webs)):
-            webp = webs[i]
-            key = keys[i]
-            fernet = Fernet(key.encode())
-            token = tokens[i]
-            loginpassword = fernet.decrypt(token.encode()).decode('UTF-8').split()
-            login = loginpassword[0]
-            password = loginpassword[1]
-            rline = webp + ': ' + '\t' + 'login: ' + login + '\t' + 'password: ' + password + '\n'
-            line += rline
-        self.text.setText(line)
+        try:
+            file_keys = open('key.txt', 'r')
+            file_token = open('token.txt', 'r')
+            file_prog = open('wbprog.txt', 'r')
+            for key in file_keys.readlines():
+                keys.append(key)
+            for web in file_prog.readlines():
+                webs.append(web)
+            for token in file_token.readlines():
+                tokens.append(token)
+            for i in range(len(webs)):
+                webp = webs[i]
+                key = keys[i]
+                fernet = Fernet(key.encode())
+                token = tokens[i]
+                loginpassword = fernet.decrypt(token.encode()).decode('UTF-8').split()
+                login = loginpassword[0]
+                password = loginpassword[1]
+                rline = webp + ': ' + '\t' + 'login: ' + login + '\t' + 'password: ' + password + '\n'
+                line += rline
+            self.text.setText(line)
+        except FileNotFoundError:
+            self.text.setText('Вы не добавили еще ни одного аккаунта и пароля в сейф')
+
 
     def switch(self):
         self.close()
@@ -212,11 +219,11 @@ class Settings(QMainWindow):
         uic.loadUi('Settings.ui', self)
         self.cancel.clicked.connect(self.switch)
         self.exit.clicked.connect(self.switch)
-        self.save.clicked.connect(self.max_mistakes())
+        self.save.clicked.connect(self.max_mistakes)
 
     def max_mistakes(self):
         try:
-            mistakes = int(self.max_num.text())
+            mistakes = self.max_num.text()
             file = open('max_mistakes.txt', 'w')
             file.write(mistakes)
         except ValueError:
