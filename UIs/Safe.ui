@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Safe</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>safe.png</normaloff>safe.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="exit">
     <property name="geometry">
