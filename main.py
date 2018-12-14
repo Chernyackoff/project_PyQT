@@ -225,13 +225,13 @@ class AddPassword(QDialog):
         login = self.Login.text()
         password = self.Password.text()
         webprog = self.siteprog.text()
-        file_prog.write(webprog)
+        file_prog.write(webprog + '\n')
         key = Fernet.generate_key()
-        file_keys.write(key.decode())
+        file_keys.write(key.decode() + '\n')
         fernet = Fernet(key)
         line = login + ' ' + password
         token = fernet.encrypt(line.encode('UTF-8'))
-        file_token.write(token.decode())
+        file_token.write(token.decode() + '\n')
         self.close()
 
 
@@ -259,9 +259,12 @@ class Safe(QMainWindow):
                 tokens.append(token)
             for i in range(len(webs)):
                 webp = webs[i]
+                webp = webp[:-1]
                 key = keys[i]
+                key = key[:-1]
                 fernet = Fernet(key.encode())
                 token = tokens[i]
+                token = token[:-1]
                 loginpassword = fernet.decrypt(token.encode()).decode('UTF-8').split()
                 login = loginpassword[0]
                 password = loginpassword[1]
