@@ -46,12 +46,25 @@ class Authorisation(QMainWindow):  # Creates new Authorisation window
                 else:
                     self.switch_to_main()
         if max_mistakes == count:  # Security needs
+            self.ErrorText.setText('Вы  превысили лимит: ключи стерты')
+            try:
+                os.remove('Account.txt')
+            except FileNotFoundError:
+                pass
+            try:
+                os.remove('token.txt')
+            except FileNotFoundError:
+                pass
             try:
                 os.remove('key.txt')
             except FileNotFoundError:
-                self.ErrorText.setText('Вы  превысили лимит: ключи стерты')
+                pass
             try:
-                os.remove('token.txt')
+                os.remove('max_mistakes.txt')
+            except FileNotFoundError:
+                pass
+            try:
+                os.remove('webprog.txt')
             except FileNotFoundError:
                 pass
 
@@ -111,9 +124,24 @@ class Dialog(QDialog):
         self.okey.clicked.connect(self.deletion)
 
     def deletion(self):
-        os.remove('Account.txt')
         try:
-            os.remove('Passwords.txt')
+            os.remove('Account.txt')
+        except FileNotFoundError:
+            pass
+        try:
+            os.remove('token.txt')
+        except FileNotFoundError:
+            pass
+        try:
+            os.remove('key.txt')
+        except FileNotFoundError:
+            pass
+        try:
+            os.remove('max_mistakes.txt')
+        except FileNotFoundError:
+            pass
+        try:
+            os.remove('webprog.txt')
         except FileNotFoundError:
             pass
 
