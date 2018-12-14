@@ -9,14 +9,14 @@ from PyQt5 import uic
 from cryptography.fernet import Fernet
 
 
-class Authorisation(QMainWindow):                       # Creates new Authorisation window
+class Authorisation(QMainWindow):  # Creates new Authorisation window
     def __init__(self):
         super().__init__()
         uic.loadUi('UIs/Authorisation.ui', self)
-        self.LogInBtn.clicked.connect(self.LogIn)       # Reads click
+        self.LogInBtn.clicked.connect(self.LogIn)  # Reads click
         self.NewAccount.triggered.connect(self.switch)  # Reads menu bar
 
-    def LogIn(self):                                            # Process of log in
+    def LogIn(self):  # Process of log in
         count = 0
         max_mistakes = -1
         try:
@@ -25,14 +25,14 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
         except FileNotFoundError:
             pass
         try:
-            file = open('Account.txt', 'r')                     # Opens file with login + password
+            file = open('Account.txt', 'r')  # Opens file with login + password
         except FileNotFoundError:
             self.ErrorText.setText('Ошибка. Создайте аккаунт')  # Returns Error
         else:
-            login = self.LoginFld.text()                        # Reads Login
-            password = self.passwFld.text()                     # Reads password
+            login = self.LoginFld.text()  # Reads Login
+            password = self.passwFld.text()  # Reads password
             try:
-                if login != '' and password != '':              # If not filled raises Error
+                if login != '' and password != '':  # If not filled raises Error
                     pass
                 else:
                     raise ValueError
@@ -45,7 +45,7 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
                     count += 1
                 else:
                     self.switch_to_main()
-        if max_mistakes == count:                                                # Security needs
+        if max_mistakes == count:  # Security needs
             try:
                 os.remove('key.txt')
             except FileNotFoundError:
@@ -55,7 +55,7 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
             except FileNotFoundError:
                 pass
 
-    def switch(self):                                   # Switches to the new window
+    def switch(self):  # Switches to the new window
         window.close()
         self.new_window = NewAccount()
         self.new_window.show()
@@ -66,7 +66,7 @@ class Authorisation(QMainWindow):                       # Creates new Authorisat
         self.new_window.show()
 
 
-class NewAccount(QMainWindow):                                  # Window of creating of a new account
+class NewAccount(QMainWindow):  # Window of creating of a new account
     def __init__(self):
         super().__init__()
         uic.loadUi('UIs/NewAccount.ui', self)
@@ -125,6 +125,8 @@ class MainPage(QMainWindow):
         self.AddPasswd.clicked.connect(self.add_password)
         self.Safe.clicked.connect(self.safe_switch)
         self.Settings.clicked.connect(self.settings)
+        self.exit.clicked.connect(self.close)
+        self.delete_account.clicked.connect(self.deletion)
 
     def add_password(self):
         self.dialog = AddPassword()
@@ -139,6 +141,36 @@ class MainPage(QMainWindow):
         self.close()
         self.new_window = Settings()
         self.new_window.show()
+
+    def deletion(self):
+        self.dialog = Deletion()
+        self.dialog.show()
+
+
+class Deletion(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('UIs/Deletion.ui', self)
+        self.cancel.clicked.connect(self.close)
+        self.Okey.clicked.connect(self.deletion_ac)
+
+    def deletion_ac(self):
+        try:
+            os.remove('Account.txt')
+        except FileNotFoundError:
+            pass
+        try:
+            os.remove('token.txt')
+        except FileNotFoundError:
+            pass
+        try:
+            os.remove('key.txt')
+        except FileNotFoundError:
+            pass
+        try:
+            os.remove('max_mistakes.txt')
+        except FileNotFoundError:
+            pass
 
 
 class AddPassword(QDialog):
@@ -205,7 +237,6 @@ class Safe(QMainWindow):
             self.text.setText(line)
         except FileNotFoundError:
             self.text.setText('Вы не добавили еще ни одного аккаунта и пароля в сейф')
-
 
     def switch(self):
         self.close()

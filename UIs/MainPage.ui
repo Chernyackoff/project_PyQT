@@ -65,6 +65,30 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="delete_account">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Удалить аккаунт</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="exit">
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Выйти</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
