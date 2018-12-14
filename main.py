@@ -171,6 +171,11 @@ class Deletion(QDialog):
             os.remove('max_mistakes.txt')
         except FileNotFoundError:
             pass
+        try:
+            os.remove('webprog.txt')
+        except FileNotFoundError:
+            pass
+        self.close()
 
 
 class AddPassword(QDialog):
