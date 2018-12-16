@@ -15,9 +15,9 @@ class Authorisation(QMainWindow):  # Creates new Authorisation window
         uic.loadUi('UIs/Authorisation.ui', self)
         self.LogInBtn.clicked.connect(self.LogIn)  # Reads click
         self.NewAccount.triggered.connect(self.switch)  # Reads menu bar
+        self.count = 0
 
     def LogIn(self):  # Process of log in
-        count = 0
         max_mistakes = -1
         try:
             file = open('max_mistakes.txt', 'r')
@@ -42,10 +42,10 @@ class Authorisation(QMainWindow):  # Creates new Authorisation window
                 line = file.readline()
                 if login + password != line or line == '':
                     self.ErrorText.setText('Ошибка. Введите верные данные')
-                    count += 1
+                    self.count += 1
                 else:
                     self.switch_to_main()
-        if max_mistakes == count:  # Security needs
+        if max_mistakes == self.count:  # Security needs
             self.ErrorText.setText('Вы  превысили лимит: ключи стерты')
             try:
                 os.remove('Account.txt')
@@ -144,6 +144,7 @@ class Dialog(QDialog):
             os.remove('webprog.txt')
         except FileNotFoundError:
             pass
+        self.close()
 
 
 class MainPage(QMainWindow):
@@ -269,7 +270,7 @@ class Safe(QMainWindow):
                 login = loginpassword[0]
                 password = loginpassword[1]
                 rline = webp + ': ' + '\t' + 'login: ' + login + '\t' + 'password: ' + password + '\n'
-                line += rline
+                line += rlinecl
             self.text.setText(line)
         except FileNotFoundError:
             self.text.setText('Вы не добавили еще ни одного аккаунта и пароля в сейф')
