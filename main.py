@@ -48,10 +48,6 @@ class Authorisation(QMainWindow):  # Creates new Authorisation window
         if max_mistakes == self.count:  # Security needs
             self.ErrorText.setText('Вы  превысили лимит: ключи стерты')
             try:
-                os.remove('Account.txt')
-            except FileNotFoundError:
-                pass
-            try:
                 os.remove('token.txt')
             except FileNotFoundError:
                 pass
@@ -270,7 +266,7 @@ class Safe(QMainWindow):
                 login = loginpassword[0]
                 password = loginpassword[1]
                 rline = webp + ': ' + '\t' + 'login: ' + login + '\t' + 'password: ' + password + '\n'
-                line += rlinecl
+                line += rline
             self.text.setText(line)
         except FileNotFoundError:
             self.text.setText('Вы не добавили еще ни одного аккаунта и пароля в сейф')
