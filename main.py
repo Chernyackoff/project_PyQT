@@ -9,7 +9,7 @@ from PyQt5 import uic
 from cryptography.fernet import Fernet
 
 
-class Authorisation(QMainWindow):  # Creates new Authorisation window
+class Authorization(QMainWindow):  # Creates new Authorization window
     def __init__(self):
         super().__init__()
         uic.loadUi('UIs/Authorisation.ui', self)
@@ -20,12 +20,12 @@ class Authorisation(QMainWindow):  # Creates new Authorisation window
     def LogIn(self):  # Process of log in
         max_mistakes = -1
         try:
-            file = open('max_mistakes.txt', 'r')
+            file = open('.max_mistakes.txt', 'r')
             max_mistakes = int(file.readline())
         except FileNotFoundError:
             pass
         try:
-            file = open('Account.txt', 'r')  # Opens file with login + password
+            file = open('.Account.txt', 'r')  # Opens file with login + password
         except FileNotFoundError:
             self.ErrorText.setText('Ошибка. Создайте аккаунт')  # Returns Error
         else:
@@ -48,19 +48,19 @@ class Authorisation(QMainWindow):  # Creates new Authorisation window
         if max_mistakes == self.count:  # Security needs
             self.ErrorText.setText('Вы  превысили лимит: ключи стерты')
             try:
-                os.remove('token.txt')
+                os.remove('.token.txt')
             except FileNotFoundError:
                 pass
             try:
-                os.remove('key.txt')
+                os.remove('.key.txt')
             except FileNotFoundError:
                 pass
             try:
-                os.remove('max_mistakes.txt')
+                os.remove('.max_mistakes.txt')
             except FileNotFoundError:
                 pass
             try:
-                os.remove('webprog.txt')
+                os.remove('.webprog.txt')
             except FileNotFoundError:
                 pass
 
@@ -93,7 +93,7 @@ class NewAccount(QMainWindow):  # Window of creating of a new account
         except ValueError:
             self.ErrorText.setText('Введите логин И (!!!) Пароль')
         try:
-            file2 = open('Account.txt', 'r')
+            file2 = open('.Account.txt', 'r')
             if login + password == file2.readline():
                 self.ErrorText.setText('Ошибка. Аккаунт уже существует')
                 file2.close()
@@ -101,14 +101,14 @@ class NewAccount(QMainWindow):  # Window of creating of a new account
                 self.dialog = Dialog()
                 self.dialog.show()
         except FileNotFoundError:
-            file = open('Account.txt', 'w')
+            file = open('.Account.txt', 'w')
             file.write(login + password)
             file.close()
             self.switch()
 
     def switch(self):
         self.close()
-        self.new_window = Authorisation()
+        self.new_window = Authorization()
         self.new_window.show()
 
 
@@ -121,23 +121,23 @@ class Dialog(QDialog):
 
     def deletion(self):
         try:
-            os.remove('Account.txt')
+            os.remove('.Account.txt')
         except FileNotFoundError:
             pass
         try:
-            os.remove('token.txt')
+            os.remove('.token.txt')
         except FileNotFoundError:
             pass
         try:
-            os.remove('key.txt')
+            os.remove('.key.txt')
         except FileNotFoundError:
             pass
         try:
-            os.remove('max_mistakes.txt')
+            os.remove('.max_mistakes.txt')
         except FileNotFoundError:
             pass
         try:
-            os.remove('webprog.txt')
+            os.remove('.webprog.txt')
         except FileNotFoundError:
             pass
         self.close()
@@ -181,23 +181,23 @@ class Deletion(QDialog):
 
     def deletion_ac(self):
         try:
-            os.remove('Account.txt')
+            os.remove('.Account.txt')
         except FileNotFoundError:
             pass
         try:
-            os.remove('token.txt')
+            os.remove('.token.txt')
         except FileNotFoundError:
             pass
         try:
-            os.remove('key.txt')
+            os.remove('.key.txt')
         except FileNotFoundError:
             pass
         try:
-            os.remove('max_mistakes.txt')
+            os.remove('.max_mistakes.txt')
         except FileNotFoundError:
             pass
         try:
-            os.remove('webprog.txt')
+            os.remove('.webprog.txt')
         except FileNotFoundError:
             pass
         self.close()
@@ -212,13 +212,13 @@ class AddPassword(QDialog):
 
     def addnew(self):
         try:
-            file_prog = open('webprog.txt', 'a')
-            file_keys = open('key.txt', 'a')
-            file_token = open("token.txt", 'a')
+            file_prog = open('.webprog.txt', 'a')
+            file_keys = open('.key.txt', 'a')
+            file_token = open(".token.txt", 'a')
         except FileNotFoundError:
-            file_prog = open('webprog.txt', 'w')
-            file_keys = open('key.txt', 'w')
-            file_token = open("token.txt", 'w')
+            file_prog = open('.webprog.txt', 'w')
+            file_keys = open('.key.txt', 'w')
+            file_token = open(".token.txt", 'w')
         login = self.Login.text()
         password = self.Password.text()
         webprog = self.siteprog.text()
@@ -245,9 +245,9 @@ class Safe(QMainWindow):
         webs = []
         tokens = []
         try:
-            file_keys = open('key.txt', 'r')
-            file_token = open('token.txt', 'r')
-            file_prog = open('webprog.txt', 'r')
+            file_keys = open('.key.txt', 'r')
+            file_token = open('.token.txt', 'r')
+            file_prog = open('.webprog.txt', 'r')
             for key in file_keys.readlines():
                 keys.append(key)
             for web in file_prog.readlines():
@@ -288,7 +288,7 @@ class Settings(QMainWindow):
     def max_mistakes(self):
         try:
             mistakes = self.max_num.text()
-            file = open('max_mistakes.txt', 'w')
+            file = open('.max_mistakes.txt', 'w')
             file.write(mistakes)
         except ValueError:
             self.ErrorText.setText('Введите корректное число!!!')
@@ -298,8 +298,8 @@ class Settings(QMainWindow):
         self.new_window = MainPage()
         self.new_window.show()
 
-
-app = QApplication(sys.argv)
-window = Authorisation()
-window.show()
-sys.exit(app.exec_())
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = Authorization()
+    window.show()
+    sys.exit(app.exec_())
